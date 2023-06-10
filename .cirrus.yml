@@ -17,14 +17,14 @@ task:
       privileged: true
       cpu: 8
       memory: 32G
-
-  Clone_script:
-      - git clone --depth=1 --recurse-submodules -j8 --single-branch https://github.com/Rem01Gaming/liquid_kernel_realme_even ~/liquid
-  
+      
   setup_script:
       - cd ~/liquid
       - wget https://raw.githubusercontent.com/TheUnknownName/toolFW/main/setup.sh
       - bash setup.sh
+      
+  Clone_script:
+      - git clone --depth=1 --recurse-submodules -j8 --single-branch https://github.com/Rem01Gaming/liquid_kernel_realme_even ~/liquid
 
   build_script:
       - cd ~/liquid
