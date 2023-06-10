@@ -22,14 +22,13 @@ task:
   Clone_script:
       - git clone --depth=1 --single-branch https://github.com/Rem01Gaming/liquid_kernel_realme_even ~/liquid
   
- 
-
-  Setup_script:
+  setup_build:
       - cd ~/liquid
       - wget https://raw.githubusercontent.com/TheUnknownName/toolFW/main/setup.sh
       - bash setup.sh
 
-  DumprX_script:
+  build_script:
       - cd ~/liquid
       - wget https://raw.githubusercontent.com/TheUnknownName/Kernel-CI/main/build.sh
+      - chmod +x build.sh
       - ./build.sh $(cat ${CIRRUS_WORKING_DIR}/name-kernel.txt)
