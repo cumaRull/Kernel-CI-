@@ -13,7 +13,7 @@ task:
   auto_cancellation: $CIRRUS_BRANCH == 'autocancel'
   timeout_in: 120m
   container:
-      image: ghcr.io/tunbudi06/docker:arch
+      image: ubuntu:latest
       privileged: true
       cpu: 8
       memory: 32G
@@ -21,7 +21,7 @@ task:
   Clone_script:
       - git clone --depth=1 --recurse-submodules -j8 --single-branch https://github.com/Rem01Gaming/liquid_kernel_realme_even ~/liquid
   
-  setup_build:
+  setup_script:
       - cd ~/liquid
       - wget https://raw.githubusercontent.com/TheUnknownName/toolFW/main/setup.sh
       - bash setup.sh
