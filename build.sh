@@ -11,12 +11,12 @@ git clone --depth=1 https://github.com/eun0115/AnyKernel3.git -b even AnyKernel
 git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
 
 #BY ZYCROMERZ
-git clone --depth=1 https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 13 aarch64-gcc
-git clone --depth=1 https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 13 aarch32-gcc
+#git clone --depth=1 https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 13 aarch64-gcc
+#git clone --depth=1 https://github.com/ZyCromerZ/arm-zyc-linux-gnueabi -b 13 aarch32-gcc
 
 #BY ETERNAL COMPILER
-#git clone --depth=1 https://github.com/EternalX-project/aarch64-linux-gnu.git aarch64-gcc
-#git clone --depth=1 https://github.com/EternalX-project/arm-linux-gnueabi.git aarch32-gcc
+git clone --depth=1 https://github.com/EternalX-project/aarch64-linux-gnu.git aarch64-gcc
+git clone --depth=1 https://github.com/EternalX-project/arm-linux-gnueabi.git aarch32-gcc
 }
 
 function cleaning_cache {
@@ -93,9 +93,10 @@ if [ -d out ];then
                                                                                                                                                                                                                                                                                                  cd ..
                                                                                                                                                                                                                                                                                                  }
 
+                                                                                                                                                                                                                                                                                                 sendinfo
                                                                                                                                                                                                                                                                                                  clone_git
                                                                                                                                                                                                                                                                                                  cleaning_cache
-                                                                                                                                                                                                                                                                                                 sendinfo
+                                                                                                                                                                                                                                                                                                 
                                                                                                                                                                                                                                                                                                  compile
                                                                                                                                                                                                                                                                                                  zipping
                                                                                                                                                                                                                                                                                                  END=$(date +"%s")
