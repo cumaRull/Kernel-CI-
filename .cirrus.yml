@@ -13,7 +13,7 @@ task:
   auto_cancellation: $CIRRUS_BRANCH == 'autocancel'
   timeout_in: 120m
   container:
-      image: ubuntu:18.04
+      image: ubuntu
       privileged: true
       cpu: 8
       memory: 32G
