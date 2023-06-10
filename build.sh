@@ -10,7 +10,7 @@ token="$TG_TOKEN"
 clone_git() {
   # download toolchains
   git clone --depth=1 https://github.com/eun0115/AnyKernel3.git -b even ~/AnyKernel
-  git clone --depth=1 https://github.com/SayuZX/android_prebuilts_clang_host_linux-x86_clang-r437112.git clang
+  git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
 
   # BY ZYCROMERZ
   # git clone --depth=1 https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 13 aarch64-gcc
@@ -44,7 +44,7 @@ sendinfo() {
     -d chat_id="$chat_id" \
     -d "disable_web_page_preview=true" \
     -d "parse_mode=html" \
-    -d text="<b>$NAME_KERNEL</b>%0ABuild started on <code>GearCI</code>%0AFor device <b>realme C25/C25s</b> (even)%0Abranch <code>$(git rev-parse --abbrev-ref HEAD)</code> (master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>${KBUILD_COMPILER_STRING}</code>%0AStarted on <code>$(date)</code>%0A<b>Build Status:</b> Beta"
+    -d text="<b>$NAME_KERNEL</b>%0ABuild started on <code>GearCI</code>%0AFor device <b>realme C25/C25s</b> (even)%0Abranch <code>$(git rev-parse --abbrev-ref HEAD)</code> (master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>$(~/liquid/clang/bin/clang --version | head -n 1 | perl -pe 's/\http.*?\)//gs' | sed -e 's/ */ /g')</code>%0AStarted on <code>$(date)</code>%0A<b>Build Status:</b> Beta"
 }
 
 push() {
@@ -79,7 +79,6 @@ compile() {
   make O=out ARCH=arm64 even_defconfig
 
   PATH="${PWD}/clang/bin:${PATH}:${PWD}/aarch32-gcc/bin:${PATH}:${PWD}/aarch64-gcc/bin:${PATH}" \
-  export KBUILD_COMPILER_STRING="$(${PWD}/clang/bin/clang --version | head -n 1 | perl -pe 's/\http.*?\)//gs' | sed -e 's/ */ /g')"
   make -j$(nproc --all) O=out \
     ARCH=arm64 \
     CC="clang" \
