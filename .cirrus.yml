@@ -20,8 +20,8 @@ task:
       
   setup_script:
       - apt update
-      - apt upgrade
-      - apt install wget git
+      - apt upgrade -y
+      - apt install wget git -y
       - wget https://raw.githubusercontent.com/TheUnknownName/toolFW/main/setup.sh
       - bash setup.sh
       
