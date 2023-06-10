@@ -27,7 +27,7 @@ if [ -d out ];then
      rm -rf HASIL/**
      fi
    if [ -d ~/AnyKernel ];then
-     rm -rf ~/AnyKernel ];then
+     rm -rf ~/AnyKernel
    fi
      }
 
