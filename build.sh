@@ -7,7 +7,7 @@ token="$TG_TOKEN"
 
 function clone_git {
 #download toolchains
-git clone --depth=1 https://github.com/eun0115/AnyKernel3.git -b even AnyKernel
+git clone --depth=1 https://github.com/eun0115/AnyKernel3.git -b even ~/AnyKernel
 git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
 
 #BY ZYCROMERZ
@@ -26,6 +26,9 @@ if [ -d out ];then
    if [ -d HASIL ];then
      rm -rf HASIL/**
      fi
+   if [ -d ~/AnyKernel ];then
+     rm -rf ~/AnyKernel ];then
+   fi
      }
 
      function sticker() {
@@ -44,7 +47,7 @@ if [ -d out ];then
 
                                                              # Push kernel to channel
                                                              function push() {
-                                                                 cd AnyKernel
+                                                                 cd ~/AnyKernel
                                                                      ZIP=$(echo *.zip)
                                                                          curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
                                                                                  -F chat_id="$chat_id" \
@@ -83,19 +86,20 @@ if [ -d out ];then
                                                                                                                                                                                                                                                                CROSS_COMPILE_ARM32="${PWD}/aarch32-gcc/bin/arm-linux-gnueabihf-" \
                                                                                                                                                                                                                                                                                      CONFIG_NO_ERROR_ON_MISMATCH=y \
                                                                                                                                                                                                                                                                                      V=0 2>&1 | tee log.txt
-                                                                                                                                                                                                                                                                                     cp out/arch/arm64/boot/Image.gz-dtb AnyKernel
+                                                                                                                                                                                                                                                                                     cp out/arch/arm64/boot/Image.gz-dtb ~/AnyKernel
                                                                                                                                                                                                                                                                                      }
 
                                                                                                                                                                                                                                                                                      # Zipping
                                                                                                                                                                                                                                                                                      function zipping() {
-                                                                                                                                                                                                                                                                                         cd AnyKernel  exit 1
+                                                                                                                                                                                                                                                                                         cd ~/AnyKernel
                                                                                                                                                                                                                                                                                              zip -r9 ${NAME_KERNEL}_even-RUI2-${TANGGAL}.zip *
                                                                                                                                                                                                                                                                                                  cd ..
                                                                                                                                                                                                                                                                                                  }
 
                                                                                                                                                                                                                                                                                                  sendinfo
-                                                                                                                                                                                                                                                                                                 clone_git
                                                                                                                                                                                                                                                                                                  cleaning_cache
+                                                                                                                                                                                                                                                                                                 clone_git
+                                                                                                                                                                                                                                                                                                 
                                                                                                                                                                                                                                                                                                  
                                                                                                                                                                                                                                                                                                  compile
                                                                                                                                                                                                                                                                                                  zipping
