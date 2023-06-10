@@ -31,5 +31,5 @@ task:
 
   DumprX_script:
       - cd ~/liquid
-      - wget 
+      - wget https://raw.githubusercontent.com/TheUnknownName/Kernel-CI/main/build.sh
       - ./build.sh $(cat ${CIRRUS_WORKING_DIR}/name-kernel.txt)
