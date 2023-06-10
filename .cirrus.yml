@@ -19,6 +19,9 @@ task:
       memory: 32G
       
   setup_script:
+      - apt update
+      - apt upgrade
+      - apt install wget git
       - wget https://raw.githubusercontent.com/TheUnknownName/toolFW/main/setup.sh
       - bash setup.sh
       
