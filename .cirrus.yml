@@ -10,7 +10,6 @@ env:
 task:
   name: "KERNEL BUILD CI by TheUnknownName06"
 
-  skip: $CIRRUS_BRANCH == 'main'
   auto_cancellation: $CIRRUS_BRANCH == 'autocancel'
   timeout_in: 120m
   container:
