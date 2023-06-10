@@ -79,6 +79,7 @@ compile() {
   make O=out ARCH=arm64 even_defconfig
 
   PATH="${PWD}/clang/bin:${PATH}:${PWD}/aarch32-gcc/bin:${PATH}:${PWD}/aarch64-gcc/bin:${PATH}" \
+  export KBUILD_COMPILER_STRING="$(${PWD}/clang/bin/clang --version | head -n 1 | perl -pe 's/\http.*?\)//gs' | sed -e 's/ */ /g')"
   make -j$(nproc --all) O=out \
     ARCH=arm64 \
     CC="clang" \
