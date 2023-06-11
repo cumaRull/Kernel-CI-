@@ -10,7 +10,12 @@ token="$TG_TOKEN"
 clone_git() {
   # download toolchains
   git clone --depth=1 https://github.com/eun0115/AnyKernel3.git -b even ~/AnyKernel
-  git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
+  
+  #proton clang
+  #git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
+  
+  #clang 14
+  git clone --depth=1 https://github.com/SayuZX/android_prebuilts_clang_host_linux-x86_clang-r437112.git clang
 
   # BY ZYCROMERZ
   # git clone --depth=1 https://github.com/ZyCromerZ/aarch64-zyc-linux-gnu -b 13 aarch64-gcc
