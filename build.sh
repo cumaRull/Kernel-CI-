@@ -92,7 +92,7 @@ push() {
 
 error_handler() {
   cd ~/AnyKernel
-  ~/log_build.txt
+  mv ~/log_build.txt .
   ZIP=log_build.txt
   curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
     -F chat_id="$chat_id" \
@@ -121,7 +121,7 @@ compile() {
     CROSS_COMPILE="${PWD}/aarch64-gcc/bin/aarch64-linux-gnu-" \
     CROSS_COMPILE_ARM32="${PWD}/aarch32-gcc/bin/arm-linux-gnueabihf-" \
     CONFIG_NO_ERROR_ON_MISMATCH=y \
-    V=0 2>&1 | tee log.txt
+    V=0 
 
   cp out/arch/arm64/boot/Image.gz-dtb ~/AnyKernel
 }
