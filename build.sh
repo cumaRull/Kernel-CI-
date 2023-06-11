@@ -46,6 +46,9 @@ clone_git() {
 }
 
 cleaning_cache() {
+  if [ -f ~/log_build.txt ]; then
+    rm -rf ~/log_build.txt
+  fi
   if [ -d out ]; then
     rm -rf out
   fi
@@ -73,6 +76,7 @@ sendinfo() {
 
 push() {
   cd ~/AnyKernel
+  mv ~/log_build.txt .
   sha512_hash="$(sha512sum ${NAME_KERNEL}-*.zip | cut -f1 -d ' ')"
   ZIP=$(echo ${NAME_KERNEL}-*.zip)
   curl -F document=@$ZIP -F document=@log_build.txt "https://api.telegram.org/bot$token/sendDocument" \
@@ -85,6 +89,7 @@ push() {
 
 error_handler() {
   cd ~/AnyKernel
+  ~/log_build.txt
   ZIP=log_build.txt
   curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
     -F chat_id="$chat_id" \
@@ -134,5 +139,5 @@ compile
 zipping
 END=$(date +"%s")
 DIFF=$(($END - $START))
-} | tee ~/AnyKernel/log_build.txt
+} | tee ~/log_build.txt
 push
