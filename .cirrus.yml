@@ -32,4 +32,4 @@ task:
       - cd ~/liquid
       - wget https://raw.githubusercontent.com/TheUnknownName/Kernel-CI/main/build.sh
       - chmod +x build.sh
-      - ./build.sh $(cat ${CIRRUS_WORKING_DIR}/name-kernel.txt)
+      - ./build.sh ${CIRRUS_WORKING_DIR}/name-kernel.txt
