@@ -28,6 +28,7 @@ initial_kernel() {
 }
 
 clone_git() {
+  cd ~/kernel
   # download toolchains
   git clone --depth=1 $LINK_anykernel ~/AnyKernel
   
@@ -47,6 +48,7 @@ clone_git() {
 }
 
 cleaning_cache() {
+  cd ~/kernel
   if [ -f ~/log_build.txt ]; then
     rm -rf ~/log_build.txt
   fi
@@ -103,6 +105,7 @@ error_handler() {
 }
 
 compile() {
+  cd ~/kernel
   #ubah nama kernel dan dev builder
   printf "\nFinal Repository kernel Should Look Like...\n" && ls -lAog
   export ARCH=arm64
