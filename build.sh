@@ -60,7 +60,7 @@ push() {
     -F chat_id="$chat_id" \
     -F "disable_web_page_preview=true" \
     -F "parse_mode=html" \
-    -F caption="Build took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>realme C25/C25s (even)</b> | <b>$(${GCC}gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b> | <b>SHA512SUM</b>: $sha512_hash"
+    -F caption="Build took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>realme C25/C25s (even)</b> | <b>$(${GCC}gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b> | <b>SHA512SUM</b>: <code>$sha512_hash</code>"
 }
 
 finerr() {
