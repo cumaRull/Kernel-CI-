@@ -13,6 +13,7 @@ export LOCALVERSION=$(grep local_version $NAME_KERNEL_FILE | cut -f2 -d"=" )
 NAME_KERNEL=$(grep name_zip $NAME_KERNEL_FILE | cut -f2 -d"=" )
 VENDOR_NAME=$(grep vendor_name $NAME_KERNEL_FILE | cut -f2 -d"=" )
 DEVICE_NAME=$(grep device_name $NAME_KERNEL_FILE | cut -f2 -d"=" )
+DEFCONFIG_NAME=$(grep defconfig_name $NAME_KERNEL_FILE | cut -f2 -d"=" )
 
 #INFORMATION GATHER LINK
 LINK_KERNEL=$(grep link_kernel $NAME_KERNEL_FILE | cut -f2 -d"=" )
@@ -108,7 +109,7 @@ compile() {
   [ -d "out" ] && rm -rf out
   mkdir -p out
 
-  make O=out ARCH=arm64 even_defconfig
+  make O=out ARCH=arm64 $DEFCONFIG_NAME
 
   PATH="${PWD}/clang/bin:${PATH}:${PWD}/aarch32-gcc/bin:${PATH}:${PWD}/aarch64-gcc/bin:${PATH}" \
   make -j$(nproc --all) O=out \
