@@ -3,10 +3,6 @@ env:
   TG_CHAT: -1001857624835
   TG_TOKEN: ENCRYPTED[f58b0ca4e90cc00c02576dbb897886d89c1b919ad3e0f0d625d8ab5432e979a4e53838ad0dcc88d3f85b52dba62d7977]
 
-
-
-
-
 task:
   name: "KERNEL BUILD CI by TheUnknownName06"
 
