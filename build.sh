@@ -54,12 +54,13 @@ sendinfo() {
 
 push() {
   cd ~/AnyKernel
+  sha512_hash="$(sha512sum ${NAME_KERNEL}_*.zip | cut -f1)"
   ZIP=$(echo *.zip)
   curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
     -F chat_id="$chat_id" \
     -F "disable_web_page_preview=true" \
     -F "parse_mode=html" \
-    -F caption="Build took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>realme C25/C25s (even)</b> | <b>$(${GCC}gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b>"
+    -F caption="Build took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For <b>realme C25/C25s (even)</b> | <b>$(${GCC}gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b> | <b>SHA512SUM</b>: $sha512_hash"
 }
 
 finerr() {
