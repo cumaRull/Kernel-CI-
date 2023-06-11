@@ -102,9 +102,9 @@ zipping() {
   cd ..
 }
 
-sendinfo
 cleaning_cache
 clone_git
+sendinfo
 compile
 zipping
 END=$(date +"%s")
