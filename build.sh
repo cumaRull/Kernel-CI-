@@ -68,15 +68,14 @@ sendinfo() {
     -d chat_id="$chat_id" \
     -d "disable_web_page_preview=true" \
     -d "parse_mode=html" \
-    -d text="<b>$NAME_KERNEL</b>%0ABuild started on <code>CirrusCI</code>%0AFor device ${DEVICE_NAME} %0A | Build By <b>$KBUILD_BUILD_USER</b> | Local Version: $LOCALVERSION | branch <code>$(git rev-parse --abbrev-ref HEAD)</code> (master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>$(~/liquid/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/ */ /g')</code>%0AStarted on <code>$(date)</code>%0A<b>Build Status:</b> Beta"
+    -d text="<b>$NAME_KERNEL</b>%0ABuild started on <code>CirrusCI</code>%0AFor device ${DEVICE_NAME} %0A | Build By <b>$KBUILD_BUILD_USER</b> | Local Version: $LOCALVERSION | branch <code>$(git rev-parse --abbrev-ref HEAD)</code> (master)%0AUnder commit <code>$(git log --pretty=format:'"%h : %s"' -1)</code>%0AUsing compiler: <code>$(~/kernel/clang/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/ */ /g')</code>%0AStarted on <code>$(date)</code>%0A<b>Build Status:</b> Beta"
 }
 
 push() {
   cd ~/AnyKernel
-  sha512_hash="$(sha512sum ${NAME_KERNEL}_*.zip | cut -f1 -d ' ')"
-  ZIP1=$(echo ${NAME_KERNEL}-*.zip)
-  ZIP2=log_build.txt
-  curl -F document=@$ZIP1 -F document=@$ZIP2 "https://api.telegram.org/bot$token/sendDocument" \
+  sha512_hash="$(sha512sum ${NAME_KERNEL}-*.zip | cut -f1 -d ' ')"
+  ZIP=$(echo ${NAME_KERNEL}-*.zip)
+  curl -F document=@$ZIP -F document=@log_build.txt "https://api.telegram.org/bot$token/sendDocument" \
     -F chat_id="$chat_id" \
     -F "disable_web_page_preview=true" \
     -F "parse_mode=html" \
@@ -84,13 +83,14 @@ push() {
 }
 
 
-finerr() {
-  curl -s -X POST "https://api.telegram.org/bot$token/sendMessage" \
-    -d chat_id="$chat_id" \
-    -d "disable_web_page_preview=true" \
-    -d "parse_mode=markdown" \
-    -d text="Build throw an error(s)"
-  exit 1
+error_handler() {
+  cd ~/AnyKernel
+  ZIP=log_build.txt
+  curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
+    -F chat_id="$chat_id" \
+    -F "disable_web_page_preview=true" \
+    -F "parse_mode=html" \
+    -F caption="Build encountered an error. took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For ${DEVICE_NAME} | Build By <b>$KBUILD_BUILD_USER</b> | Local Version: $LOCALVERSION"
 }
 
 compile() {
@@ -124,6 +124,7 @@ zipping() {
   cd ..
 }
 
+trap 'error_handler' ERR
 {
 initial_kernel
 cleaning_cache
