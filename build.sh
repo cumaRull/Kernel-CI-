@@ -70,6 +70,7 @@ sticker() {
 }
 
 sendinfo() {
+  cd ~/kernel
   curl -s -X POST "https://api.telegram.org/bot$token/sendMessage" \
     -d chat_id="$chat_id" \
     -d "disable_web_page_preview=true" \
