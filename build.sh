@@ -54,7 +54,7 @@ sendinfo() {
 
 push() {
   cd ~/AnyKernel
-  sha512_hash="$(sha512sum ${NAME_KERNEL}_*.zip | cut -f1)"
+  sha512_hash="$(sha512sum ${NAME_KERNEL}_*.zip | cut -f1 -d ' ')"
   ZIP=$(echo *.zip)
   curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
     -F chat_id="$chat_id" \
