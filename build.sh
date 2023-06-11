@@ -3,7 +3,7 @@
 TANGGAL=$(date +"%F-%S")
 START=$(date +"%s")
 KERNEL_DIR=$(pwd)
-NAME_KERNEL="$1"
+NAME_KERNEL_FILE="$1"
 chat_id="$TG_CHAT"
 token="$TG_TOKEN"
 
