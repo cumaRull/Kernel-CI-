@@ -9,6 +9,7 @@ token="$TG_TOKEN"
 
 #INFROMATION NAME KERNEL
 export KBUILD_BUILD_USER=$(grep kbuild_user $NAME_KERNEL_FILE | cut -f2 -d"=" )
+export KBUILD_BUILD_HOST=$(grep kbuild_host $NAME_KERNEL_FILE | cut -f2 -d"=" )
 export LOCALVERSION=$(grep local_version $NAME_KERNEL_FILE | cut -f2 -d"=" )
 NAME_KERNEL=$(grep name_zip $NAME_KERNEL_FILE | cut -f2 -d"=" )
 VENDOR_NAME=$(grep vendor_name $NAME_KERNEL_FILE | cut -f2 -d"=" )
