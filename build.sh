@@ -9,7 +9,7 @@ token="$TG_TOKEN"
 
 clone_git() {
   # download toolchains
-  git clone --depth=1 https://github.com/eun0115/AnyKernel3.git -b even ~/AnyKernel
+  git clone --depth=1 https://github.com/TheUnknownName/AnyKernel3.git -b even-liq ~/AnyKernel
   
   #proton clang
   #git clone --depth=1 https://github.com/kdrag0n/proton-clang.git clang
@@ -54,6 +54,7 @@ sendinfo() {
 
 push() {
   cd ~/AnyKernel
+  echo $NAME_KERNEL > name_kernel.txt
   sha512_hash="$(sha512sum ${NAME_KERNEL}_*.zip | cut -f1 -d ' ')"
   ZIP=$(echo *.zip)
   curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
