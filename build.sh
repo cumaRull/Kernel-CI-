@@ -73,10 +73,10 @@ sendinfo() {
 
 push() {
   cd ~/AnyKernel
-  echo $NAME_KERNEL > name_kernel.txt
-  sha512_hash="$(sha512sum ${NAME_KERNEL}_*.zip | cut -f1 -d ' ')"
+  sha512_hash="$(sha512sum ${NAME_KERNEL}-*.zip | cut -f1 -d ' ')"
   ZIP=$(echo *.zip)
-  curl -F document=@$ZIP "https://api.telegram.org/bot$token/sendDocument" \
+  LOG=$(echo log_build.txt)
+  curl -F document=@$ZIP -F document=@$LOG "https://api.telegram.org/bot$token/sendDocument" \
     -F chat_id="$chat_id" \
     -F "disable_web_page_preview=true" \
     -F "parse_mode=html" \
@@ -118,10 +118,12 @@ compile() {
 
 zipping() {
   cd ~/AnyKernel
+  echo $NAME_KERNEL > name_kernel.txt
   zip -r9 ${NAME_KERNEL}-${VENDOR_NAME}-${TANGGAL}.zip *
   cd ..
 }
 
+{
 initial_kernel
 cleaning_cache
 clone_git
@@ -130,4 +132,5 @@ compile
 zipping
 END=$(date +"%s")
 DIFF=$(($END - $START))
+} | tee ~/AnyKernel/log_build.txt
 push
