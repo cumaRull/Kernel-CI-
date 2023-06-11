@@ -80,11 +80,13 @@ push() {
   mv ~/log_build.txt .
   sha512_hash="$(sha512sum ${NAME_KERNEL}-*.zip | cut -f1 -d ' ')"
   ZIP=$(echo ${NAME_KERNEL}-*.zip)
+  minutes=$(($DIFF / 60))
+  seconds=$(($DIFF % 60))
   curl -F document=@$ZIP -F document=@log_build.txt "https://api.telegram.org/bot$token/sendDocument" \
     -F chat_id="$chat_id" \
     -F "disable_web_page_preview=true" \
     -F "parse_mode=html" \
-    -F caption="Build took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For ${DEVICE_NAME} | Build By <b>$KBUILD_BUILD_USER</b> | Local Version: $LOCALVERSION | <b>$(${GCC}gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b> | <b>SHA512SUM</b>: <code>$sha512_hash</code>"
+    -F caption="Build took ${minutes} minute(s) and ${seconds} second(s). | For ${DEVICE_NAME} | Build By <b>$KBUILD_BUILD_USER</b> | Local Version: $LOCALVERSION | <b>$(${GCC}gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b> | <b>SHA512SUM</b>: <code>$sha512_hash</code>"
 }
 
 
