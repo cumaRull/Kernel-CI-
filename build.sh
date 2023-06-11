@@ -96,6 +96,7 @@ error_handler() {
     -F "disable_web_page_preview=true" \
     -F "parse_mode=html" \
     -F caption="Build encountered an error. took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s). | For ${DEVICE_NAME} | Build By <b>$KBUILD_BUILD_USER</b> | Local Version: $LOCALVERSION"
+  exit 1
 }
 
 compile() {
@@ -139,5 +140,5 @@ compile
 zipping
 END=$(date +"%s")
 DIFF=$(($END - $START))
-} | tee ~/log_build.txt
+} 2>&1 | tee ~/log_build.txt
 push
