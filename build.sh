@@ -87,11 +87,16 @@ push() {
   ZIP2=log_build.txt
   minutes=$(($DIFF / 60))
   seconds=$(($DIFF % 60))
-  curl -F document=@$ZIP1 -F document=@$ZIP2 "https://api.telegram.org/bot$token/sendDocument" \
+  curl -F document=@$ZIP1 "https://api.telegram.org/bot$token/sendDocument" \
     -F chat_id="$chat_id" \
     -F "disable_web_page_preview=true" \
     -F "parse_mode=html" \
     -F caption="Build took ${minutes} minute(s) and ${seconds} second(s). | For ${DEVICE_NAME} | Build By <b>$KBUILD_BUILD_USER</b> | Local Version: $LOCALVERSION | <b>$(${GCC}gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b> | <b>SHA512SUM</b>: <code>$sha512_hash</code>"
+  curl -F document=@$ZIP2 "https://api.telegram.org/bot$token/sendDocument" \
+    -F chat_id="$chat_id" \
+    -F "disable_web_page_preview=true" \
+    -F "parse_mode=html" \
+    -F caption="LOGGER BUILD FILE took ${minutes} minute(s) and ${seconds} second(s). | For ${DEVICE_NAME} | Build By <b>$KBUILD_BUILD_USER</b> | Local Version: $LOCALVERSION "
 }
 
 
