@@ -5,6 +5,7 @@ local_version=-liquidfy
 kbuild_user=TUNBudi06
 device_name=<b>realme C25/C25s</b> (even)
 vendor_name=RUI2
+defconfig_name=even_defconfig
 
 #INFORMATION LINK COMPILER
 link_gcc_aarch64=https://github.com/EternalX-project/aarch64-linux-gnu.git
