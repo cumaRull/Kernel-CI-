@@ -133,15 +133,15 @@ zipping() {
   cd ..
 }
 
-trap 'error_handler' ERR
+trap error_handler ERR
 {
-initial_kernel
-cleaning_cache
-clone_git
-sendinfo
-compile
-zipping
+initial_kernel 2>&1 | tee ~/log_build.txt
+cleaning_cache 2>&1 | tee -a ~/log_build.txt
+clone_git 2>&1 | tee -a ~/log_build.txt
+sendinfo 2>&1 | tee -a ~/log_build.txt
+compile 2>&1 | tee -a ~/log_build.txt
+zipping 2>&1 | tee -a ~/log_build.txt
 END=$(date +"%s")
 DIFF=$(($END - $START))
-} 2>&1 | tee ~/log_build.txt
+} 
 push
