@@ -92,12 +92,12 @@ push() {
     -F chat_id="$chat_id" \
     -F "disable_web_page_preview=true" \
     -F "parse_mode=html" \
-    -F caption="Build took ${minutes} minute(s) and ${seconds} second(s). |%0A USING DEFCONFIG <b>$DEFCONFIG_NAME</b> |%0A For ${DEVICE_NAME} |%0A Build By <b>$KBUILD_BUILD_USER</b> |%0A Local Version: $LOCALVERSION |%0A <b>$(${GCC}gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b> |%0A <b>SHA512SUM</b>: <code>$sha512_hash</code>"
+    -F caption="Build took ${minutes} minute(s) and ${seconds} second(s). |\n USING DEFCONFIG <b>$DEFCONFIG_NAME</b> |\n For ${DEVICE_NAME} |\n Build By <b>$KBUILD_BUILD_USER</b> |\n Local Version: $LOCALVERSION |\n <b>$(${GCC}gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')</b> |\n <b>SHA512SUM</b>: <code>$sha512_hash</code>"
   curl -F document=@$ZIP2 "https://api.telegram.org/bot$token/sendDocument" \
     -F chat_id="$chat_id" \
     -F "disable_web_page_preview=true" \
     -F "parse_mode=html" \
-    -F caption="LOGGER BUILD FILE%0A took ${minutes} minute(s) and ${seconds} second(s). |%0A USING DEFCONFIG <b>$DEFCONFIG_NAME</b> |%0A For ${DEVICE_NAME} |%0A Build By <b>$KBUILD_BUILD_USER</b> |%0A Local Version: $LOCALVERSION "
+    -F caption="LOGGER BUILD FILE\n took ${minutes} minute(s) and ${seconds} second(s). |\n USING DEFCONFIG <b>$DEFCONFIG_NAME</b> |\n For ${DEVICE_NAME} |\n Build By <b>$KBUILD_BUILD_USER</b> |\n Local Version: $LOCALVERSION "
 }
 
 
@@ -112,7 +112,7 @@ error_handler() {
     -F chat_id="$chat_id" \
     -F "disable_web_page_preview=true" \
     -F "parse_mode=html" \
-    -F caption="Build encountered an error.%0A took ${minutes} minute(s) and ${seconds} second(s). |%0A USING DEFCONFIG <b>$DEFCONFIG_NAME</b> |%0A For ${DEVICE_NAME} |%0A Build By <b>$KBUILD_BUILD_USER</b> |%0A Local Version: $LOCALVERSION"
+    -F caption="Build encountered an error.\n took ${minutes} minute(s) and ${seconds} second(s). \n USING DEFCONFIG <b>$DEFCONFIG_NAME</b> |\n For ${DEVICE_NAME} |%\n Build By <b>$KBUILD_BUILD_USER</b> |%\n Local Version: $LOCALVERSION"
   exit 1
 }
 
