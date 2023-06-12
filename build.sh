@@ -119,7 +119,7 @@ error_handler() {
 compile() {
   cd ~/kernel
   #ubah nama kernel dan dev builder
-  printf "\nFinal Repository kernel Should Look Like...\n" && ls -lAog
+  printf "\nFinal Repository kernel Should Look Like...\n" && ls -lAog ~/kernel
   export ARCH=arm64
 
   #mulai mengcompile kernel
