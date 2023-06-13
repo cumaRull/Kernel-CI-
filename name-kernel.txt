@@ -1,9 +1,9 @@
 #INFORMATION KERNEL
 link_kernel=https://github.com/Rem01Gaming/liquid_kernel_realme_even
-name_zip=Liquid-317-slmk-sehat
+name_zip=Liquid-317-slmk-final
 local_version=-liquidfy
 kbuild_user=TUNBudi06
-kbuild_host=Android-linux
+kbuild_host=AndroidTermux
 device_name=<b>realme C25/C25s</b> (even)
 vendor_name=RUI2
 
