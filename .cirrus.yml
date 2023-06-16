@@ -11,8 +11,8 @@ task:
   container:
       image: ubuntu
       privileged: true
-      cpu: 8
-      memory: 8G
+      cpu: 10
+      memory: 50G
       
   setup_script:
       - apt update
